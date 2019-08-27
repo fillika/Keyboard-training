@@ -64,7 +64,7 @@ function clearAndUpdate() {
   textExampleElement.innerHTML = ""; // Очищаю все что есть (неважно что было)
 
   for (const line of lines) { // Беру все, что содержится в lines (Там у нас все массивы, в которых содержаться объекты со свойствами в виде букв)
-    const html = lineToHTML(line); // создаю переменную html, в которую поме
+    const html = lineToHTML(line); // создаю переменную html, в которую?? Что???
     textExampleElement.append(html);
   }
 }
