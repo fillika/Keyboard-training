@@ -12,11 +12,24 @@ const lines = getLines(text); // lines содержит в себе массив
 clearAndUpdate();
 
 inputElement.addEventListener("keydown", function(event) {
+  const element = document.querySelector(`[data-key="${event.key}"]`);
   const currentLetter = getCurrentLetter();
+
+  if (element) {
+    element.classList.add("hint");
+  }
 
   if (event.key === currentLetter.label) {
     letterId = letterId + 1;
     clearAndUpdate();
+  }
+});
+
+inputElement.addEventListener("keyup", function(event) {
+  const element = document.querySelector(`[data-key="${event.key}"]`);
+
+  if (element) {
+    element.classList.remove("hint");
   }
 });
 
