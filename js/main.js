@@ -23,6 +23,7 @@ inputElement.addEventListener("keydown", function(event) {
 // Функция для создания текстовых строк для ввода
 function getLines(text) {
   const lines = []; // Создаю будущий массив строк (сюда буду помещать строки)
+
   let line = []; // Создаю пустой массив (формирую строки)
   let idCounter = 0; // Счетчик ID. Чтобы каждой букве присвоить ID
 
