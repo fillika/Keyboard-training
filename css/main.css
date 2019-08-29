@@ -189,7 +189,7 @@ body {
   text-align: right;
 }
 .keyboard .line .space {
-  margin-left: auto;
+  /* margin-left: auto; */
   width: 312px;
   text-align: right;
   color: #95a0a4;
@@ -200,7 +200,7 @@ body {
   text-align: right;
   color: #95a0a4;
   font-size: 10px;
-  margin-right: auto;
+  /* margin-right: auto; */
 }
 .mt-0 {
   margin-top: 0;
@@ -756,4 +756,14 @@ body {
 }
 .strong {
   font-weight: 700;
+}
+
+/* Мои стили fili */
+
+.line__last {
+  justify-content: center;
+}
+
+.uppercase {
+  text-transform: uppercase;
 }

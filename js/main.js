@@ -1,5 +1,6 @@
 const inputElement = document.querySelector("#input"); // Точка входа
 const textExampleElement = document.querySelector("#text-example"); // Точка выхода
+const upperOrNot = document.querySelectorAll(".letter");
 
 const text = `Разнообразный и богатый опыт рамки и место обучения кадров обеспечивает широкому кругу (специалистов) участие в формировании новых предложений. Не следует, однако забывать, что новая модель организационной деятельности требуют от нас анализа системы обучения кадров, соответствует насущным потребностям. С другой стороны дальнейшее развитие различных форм деятельности играет важную роль в формировании системы обучения кадров, соответствует насущным потребностям. Равным образом постоянный количественный рост и сфера нашей активности в значительной степени обуславливает создание существенных финансовых и административных условий.
 Не следует, однако забывать, что сложившаяся структура организации играет важную роль в формировании модели развития. Значимость этих проблем настолько очевидна, что консультация с широким активом влечет за собой процесс внедрения и модернизации модели развития. Разнообразный и богатый опыт постоянное информационно-пропагандистское обеспечение нашей деятельности обеспечивает широкому кругу (специалистов) участие в формировании системы обучения кадров, соответствует насущным потребностям.
@@ -9,29 +10,75 @@ let letterId = 1; // Переменная, которая хранит в себ
 
 const lines = getLines(text); // lines содержит в себе массив из 27 массивов в каждом по 70 объектов (каждая буква - объект)
 
-clearAndUpdate();
+// С этой функции мы начнем работу
+init();
 
-inputElement.addEventListener("keydown", function(event) {
-  const element = document.querySelector(`[data-key="${event.key}"]`);
-  const currentLetter = getCurrentLetter();
+console.log(upperOrNot);
 
-  if (element) {
-    element.classList.add("hint");
-  }
+function init() {
+  clearAndUpdate();
 
-  if (event.key === currentLetter.label) {
-    letterId = letterId + 1;
-    clearAndUpdate();
-  }
-});
+  inputElement.focus();
 
-inputElement.addEventListener("keyup", function(event) {
-  const element = document.querySelector(`[data-key="${event.key}"]`);
+  inputElement.addEventListener("keydown", function(event) {
+    const element = document.querySelector(`[data-key="${event.key}"]`);
+    const AnotherElement = document.querySelector(
+      `[data-code="${event.code}"]`
+    );
+    const currentLetter = getCurrentLetter();
 
-  if (element) {
-    element.classList.remove("hint");
-  }
-});
+    console.log(event.code);
+
+    if (element) {
+      element.classList.add("hint");
+    }
+
+    if (AnotherElement) {
+      AnotherElement.classList.add("hint");
+    }
+
+    if (event.key == "CapsLock") {
+      for (let i = 0; i < upperOrNot.length; i++) {
+        upperOrNot[i].classList.toggle("uppercase");
+      }
+    }
+
+    if (event.code == "ShiftLeft" || event.code == "ShiftRight") {
+      for (let i = 0; i < upperOrNot.length; i++) {
+        upperOrNot[i].classList.toggle("uppercase");
+      }
+    }
+
+    // Проверка на совпадение по символу
+    if (event.key === currentLetter.label) {
+      letterId = letterId + 1;
+      clearAndUpdate();
+    } else {
+      event.preventDefault();
+    }
+  });
+
+  inputElement.addEventListener("keyup", function(event) {
+    const element = document.querySelector(`[data-key="${event.key}"]`);
+    const AnotherElement = document.querySelector(
+      `[data-code="${event.code}"]`
+    );
+
+    if (element) {
+      element.classList.remove("hint");
+    }
+
+    if (AnotherElement) {
+      AnotherElement.classList.remove("hint");
+    }
+
+    if (event.code == "ShiftLeft" || event.code == "ShiftRight") {
+      for (let i = 0; i < upperOrNot.length; i++) {
+        upperOrNot[i].classList.toggle("uppercase");
+      }
+    }
+  });
+}
 
 // Функция для создания текстовых строк для ввода
 function getLines(text) {
@@ -83,7 +130,6 @@ function lineToHTML(line) {
       spanEl.classList.add("done");
     }
   }
-  console.log(divElement);
   return divElement;
 }
 
