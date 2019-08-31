@@ -6,8 +6,8 @@ const text = `Разнообразный и богатый опыт рамки �
 
 let letterId = 1; // Переменная, которая хранит в себе актуальный символ (тот символ, который мы ожидаем). Будем увеличивать её в будущем как счетчик
 let mistakeCounter = 0; // Моя переменная для выяснения кол-ва ошибок
+let letterCounter = 0; // Сколько всего нажатий
 let startMoment = null;
-let startEd = false;
 
 const lines = getLines(text); // lines содержит в себе массив из 27 массивов в каждом по 70 объектов (каждая буква - объект)
 
@@ -27,7 +27,19 @@ function init() {
     );
     const currentLetter = getCurrentLetter();
 
-    console.log(event.key);
+    // console.log(letterCounter);
+
+    if (startMoment == null) {
+      startMoment = Date.now();
+    }
+
+    console.log(startMoment);
+
+    if (event.key === "Shift" || event.key === "CapsLock") {
+      return;
+    } else {
+      letterCounter += 1;
+    }
 
     // Отслеживаем все F1-12.
     // return заканчивает выполнение всей функции, не доходя до preventDefault(), а значит кнокпи с f1-12 будут рабоатьб
@@ -75,6 +87,17 @@ function init() {
     if (currentLineNumber !== getCurrentLineNumber()) {
       inputElement.value = "";
       event.preventDefault();
+
+      const time = Date.now() - startMoment;
+      console.log(time);
+      document.querySelector("#wordsSpeed").textContent = Math.round(
+        letterCounter / (time / 60000)
+      );
+      document.querySelector("#mistakePercent").textContent =
+        Math.floor(100 * (mistakeCounter / letterCounter)) + "%";
+      startMoment = null;
+      letterCounter = 0;
+      mistakeCounter = 0;
     }
   });
 
