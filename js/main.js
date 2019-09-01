@@ -1,4 +1,4 @@
-import {text} from"./text.js";
+import { text } from "./text.js";
 
 const inputElement = document.querySelector("#input"); // Точка входа
 const textExampleElement = document.querySelector("#text-example"); // Точка выхода
@@ -8,8 +8,8 @@ let letterId = 1; // Переменная, которая хранит в себ
 let mistakeCounter = 0; // Моя переменная для выяснения кол-ва ошибок
 let letterCounter = 0; // Сколько всего нажатий
 let startMoment = null;
-
-const lines = getLines(text[0]); // lines содержит в себе массив из 27 массивов в каждом по 70 объектов (каждая буква - объект)
+let textNumber = getRandomArbitrary(0, text.length);
+let lines = getLines(text[textNumber]); // lines содержит в себе массив из 27 массивов в каждом по 70 объектов (каждая буква - объект)
 
 // С этой функции мы начнем работу
 init();
@@ -217,4 +217,8 @@ function getCurrentLetter() {
       }
     }
   }
+}
+
+function getRandomArbitrary(min, max) {
+  return Math.floor(Math.random() * (max - min) + min);
 }
