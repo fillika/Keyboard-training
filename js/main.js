@@ -11,8 +11,6 @@ const lines = getLines(text); // lines содержит в себе массив
 // С этой функции мы начнем работу
 init();
 
-console.log(upperOrNot);
-
 function init() {
   clearAndUpdate();
 
